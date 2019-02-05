@@ -1,0 +1,32 @@
+{
+  "name": "@thomn/sourcemap-service",
+  "version": "1.0.0",
+  "description": "private sourcemaps provider",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "node dev.js",
+    "inspect": "node --inspect node_modules/.bin/micro-dev"
+  },
+  "author": {
+    "name": "Oleg Kamlowski",
+    "email": "oleg.kamlowski@thomann.de",
+    "url": "https://thomann.de"
+  },
+  "license": "ISC",
+  "dependencies": {
+    "micro": "^9.3.3"
+  },
+  "devDependencies": {
+    "micro-dev": "^3.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/thomn/sourcemap-service.git"
+  },
+  "keywords": [
+    "sourcemaps",
+    "micro",
+    "service"
+  ]
+}
