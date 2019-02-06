@@ -23,12 +23,9 @@ module.exports = async ({req, res, query, store}) => {
         }
 
         const buffered = await buffer(req, OPTIONS);
-        const success = file.write(buffered);
+        file.write(buffered);
 
-        return (success)
-            ? send(res, HTTPStatus.CREATED)
-            : send(res, HTTPStatus.BAD_REQUEST)
-        ;
+        send(res, HTTPStatus.CREATED);
     } catch (e) {
         store.delete(version, name);
 
