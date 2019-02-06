@@ -1,5 +1,6 @@
 const {createReadStream: read} = require('fs');
 const {send, sendError} = require('micro');
+const HTTPStatus = require('../../lib/HTTPStatus');
 
 /**
  * User: Oleg Kamlowski <oleg.kamlowski@thomann.de>
@@ -11,7 +12,7 @@ module.exports = async ({req, res, query, cache}) => {
     const file = cache.get(version, name);
 
     if (!file) {
-        return send(res, 404);
+        return send(res, HTTPStatus.NOT_FOUND);
     }
 
     try {

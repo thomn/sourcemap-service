@@ -1,3 +1,4 @@
+// const HTTPStatus = require('../lib/HTTPStatus');
 // const {send} = require('micro');
 
 /**
@@ -8,7 +9,7 @@
 const auth = (next) => ({req, res, query}) => {
 
     // todo
-    // send(res, 403);
+    // send(res, HTTPStatus.FORBIDDEN);
 
     return next({req, res, query});
 };

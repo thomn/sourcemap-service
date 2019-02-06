@@ -1,5 +1,6 @@
 const {json, send, sendError} = require('micro');
 const {writeFileSync: write} = require('fs');
+const HTTPStatus = require('../../lib/HTTPStatus');
 
 /**
  * User: Oleg Kamlowski <oleg.kamlowski@thomann.de>
@@ -11,14 +12,14 @@ module.exports = async ({req, res, query, cache}) => {
     const exists = cache.exists(version, name);
 
     if (exists) {
-        return send(res, 409);
+        return send(res, HTTPStatus.CONFLICT);
     }
 
     try {
         const filename = cache.create(version, name);
 
         if (!filename) {
-            return send(res, 409);
+            return send(res, HTTPStatus.CONFLICT);
         }
 
         const obj = await json(req, {limit: '10mb', encoding: 'utf8'});

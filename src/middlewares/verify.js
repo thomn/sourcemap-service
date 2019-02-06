@@ -1,5 +1,6 @@
 const {send} = require('micro');
 const {basename} = require('path');
+const HTTPStatus = require('../lib/HTTPStatus');
 
 /**
  *
@@ -10,7 +11,7 @@ const verify = (next) => ({req, res, query}) => {
     const {n: name, v: version} = query;
 
     if (!name || !version) {
-        return send(res, 400);
+        return send(res, HTTPStatus.BAD_REQUEST);
     }
 
     const passed = [
@@ -28,7 +29,7 @@ const verify = (next) => ({req, res, query}) => {
         return next({req, res, query});
     }
 
-    send(res, 400);
+    send(res, HTTPStatus.BAD_REQUEST);
 };
 
 /**
