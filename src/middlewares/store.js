@@ -1,5 +1,5 @@
 const {resolve} = require('path');
-const Cache = require('../lib/Cache');
+const Store = require('../lib/Store');
 
 /**
  *
@@ -8,12 +8,12 @@ const Cache = require('../lib/Cache');
  */
 const factory = (path) => {
     const root = resolve(path);
-    const cache = (new Cache(root))
+    const store = (new Store(root))
         .initialise()
     ;
 
     return (next) => ({req, res, query}) => (
-        next({req, res, query, cache})
+        next({req, res, query, store})
     );
 };
 

@@ -6,6 +6,7 @@ const flags = {
 	silent: false,
 	host: 'localhost',
 	port: 8080,
+    limit: '10mb',
 	_: {},
 };
 

@@ -1,18 +1,27 @@
+const File = require('./File');
 const {readdirSync: read, statSync: stat, mkdirSync: mkdir} = require('fs');
 const {resolve} = require('path');
+
+/**
+ *
+ * @param version
+ * @param name
+ * @return {string}
+ */
+const getStoreKey = (version, name) => `${version}:${name}`;
 
 /**
  * User: Oleg Kamlowski <oleg.kamlowski@thomann.de>
  * Date: 01.02.2019
  * Time: 12:42
  */
-class Cache {
+class Store {
 
     /**
      *
      */
     constructor(path) {
-        this._cache = {};
+        this._store = {};
         this._path = path;
     }
 
@@ -23,20 +32,10 @@ class Cache {
      * @return {*}
      */
     get(version, name) {
-        const {_cache: cache} = this;
-        const {files, path} = cache[version] || {};
+        const {_store: store} = this;
+        const key = getStoreKey(version, name);
 
-        if (!files) {
-            return null;
-        }
-
-        const file = files.find(file => file === name);
-
-        if (!file) {
-            return null;
-        }
-
-        return resolve(path, file);
+        return store[key];
     }
 
     /**
@@ -45,16 +44,11 @@ class Cache {
      * @param name
      */
     add(version, name) {
-        const {_cache: cache, _path: path} = this;
+        const {_store: store, _path: path} = this;
+        const key = getStoreKey(version, name);
+        const cursor = resolve(path, version, name);
 
-        if (!cache[version]) {
-            cache[version] = {
-                files: [],
-                path: resolve(path, version)
-            };
-        }
-
-        cache[version].files.push(name);
+        store[key] = new File(cursor);
 
         return this;
     }
@@ -65,15 +59,11 @@ class Cache {
      * @param name
      * @return {boolean}
      */
-    exists(version, name) {
-        const {_cache: cache} = this;
-        const {files} = cache[version] || {};
+    has(version, name) {
+        const {_store: store} = this;
+        const key = getStoreKey(version, name);
 
-        if (!files) {
-            return false;
-        }
-
-       return !!files.find(file => file === name);
+        return !!store[key];
     }
 
     /**
@@ -100,7 +90,20 @@ class Cache {
 
     /**
      *
-     * @return {Cache}
+     * @param version
+     * @param name
+     * @return {Store}
+     */
+    delete(version, name) {
+        const key = getStoreKey(version, name);
+        delete this._store[key];
+
+        return this;
+    }
+
+    /**
+     *
+     * @return {Store}
      */
     initialise() {
         const {_path: path} = this;
@@ -123,4 +126,4 @@ class Cache {
     }
 }
 
-module.exports = Cache;
+module.exports = Store;

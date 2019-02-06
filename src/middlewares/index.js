@@ -6,5 +6,5 @@
 module.exports = {
     auth: require('./auth'),
     verify: require('./verify'),
-    cache: require('./cache'),
+    store: require('./store'),
 };
