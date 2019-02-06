@@ -40,7 +40,7 @@ class Router {
 
         if (this.has(method, pathname)) {
             const handler = this.get(method, pathname);
-            return handler(req, res, query);
+            return handler({req, res, query});
         }
 
         return fallback(req, res);
@@ -52,7 +52,6 @@ class Router {
      */
     register(root) {
         root = resolve(root);
-        const {_middlewares: middlewares} = this;
 
         const register = (path) => {
             const absolute = resolve(path);
@@ -64,10 +63,7 @@ class Router {
                     return register(pointer);
                 }
 
-                const handle = middlewares
-                    .reduce((fn, next) => (next(fn)), require(pointer)
-                );
-
+                const handler = require(pointer);
                 const method = basename(name, '.js');
 
                 const pathname = path
@@ -75,9 +71,7 @@ class Router {
                     .replace(/\\/g, '/')
                 ;
 
-                this.on(method, pathname, (req, res, query) => (
-                    handle({req, res, query})
-                ));
+                this.on(method, pathname, handler);
             };
 
             read(path)
@@ -96,8 +90,12 @@ class Router {
      * @return {Router}
      */
     on(method, pathname, handler) {
+        const {_middlewares: middlewares} = this;
         const route = getRouteKey(method, pathname);
-        this._routes[route] = handler;
+
+        this._routes[route] = middlewares
+            .reduce((fn, next) => (next(fn)), handler,
+        );
 
         return this;
     }
