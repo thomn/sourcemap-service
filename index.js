@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 const micro = require('micro');
 const router = require('./src/router');
 
