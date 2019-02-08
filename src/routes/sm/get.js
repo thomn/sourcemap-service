@@ -15,9 +15,9 @@ module.exports = async ({req, res, query, store}) => {
     }
 
     try {
-        const buffer = file.read();
+        const stream = file.read();
 
-        send(res, HTTPStatus.OK, buffer);
+        send(res, HTTPStatus.OK, stream);
     } catch (e) {
         sendError(req, res, e);
     }
