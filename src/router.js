@@ -7,8 +7,11 @@ const router = new Router((req, res) => {
     send(res, 404);
 });
 
-// router.use(auth);
-router.use(logger('combined'));
+if (process.env.NODE_ENV === 'production') {
+    // router.use(auth);
+    router.use(logger('combined'));
+}
+
 router.use(verify);
 router.use(store(storeDirectory));
 router.register('./src/routes');

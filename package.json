@@ -1,6 +1,6 @@
 {
   "name": "@thomn/sourcemap-service",
-  "version": "1.3.3",
+  "version": "1.3.4",
   "description": "private sourcemaps provider",
   "main": "index.js",
   "scripts": {
