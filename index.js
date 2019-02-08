@@ -2,6 +2,7 @@
 
 const micro = require('micro');
 const router = require('./src/router');
+const {version} = require('./package');
 
 const port = process.env.PORT || 3000;
 
@@ -11,4 +12,6 @@ const port = process.env.PORT || 3000;
  * Time: 19:26
  */
 const server = micro(router);
-server.listen(port);
+server.listen(port, () => {
+    console.info(`> sourcemap-service:${version} listening on port ${port}`);
+});

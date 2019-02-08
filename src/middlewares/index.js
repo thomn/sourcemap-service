@@ -6,5 +6,6 @@
 module.exports = {
     auth: require('./auth'),
     verify: require('./verify'),
+    logger: require('./logger'),
     store: require('./store'),
 };

@@ -4,14 +4,14 @@
 /**
  *
  * @param next
- * @return {function({req: *, res: *, query: *}): *}
+ * @return {function({req: *, res: *, [p: string]: *}): *}
  */
-const auth = (next) => ({req, res, query}) => {
+const auth = (next) => ({req, res, ...rest}) => {
 
     // todo
     // send(res, HTTPStatus.FORBIDDEN);
 
-    return next({req, res, query});
+    return next({req, res, ...rest});
 };
 
 /**

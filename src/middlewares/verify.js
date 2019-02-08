@@ -5,9 +5,9 @@ const HTTPStatus = require('../lib/HTTPStatus');
 /**
  *
  * @param next
- * @return {function({req: *, res: *, query: *}): *}
+ * @return {Function}
  */
-const verify = (next) => ({req, res, query}) => {
+const verify = (next) => ({req, res, query, ...rest}) => {
     const {n: name, v: version} = query;
 
     if (!name || !version) {
@@ -26,7 +26,7 @@ const verify = (next) => ({req, res, query}) => {
     ].every(Boolean);
 
     if (passed) {
-        return next({req, res, query});
+        return next({req, res, query, ...rest});
     }
 
     send(res, HTTPStatus.BAD_REQUEST);
