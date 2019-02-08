@@ -1,7 +1,7 @@
 const {resolve} = require('path');
 const micro = require('micro-dev/lib/serve');
+const {port} = require('./config');
 
-const port = process.env.PORT || 3000;
 const path = resolve(process.cwd(), './src/router');
 
 const flags = {

@@ -1,6 +1,7 @@
 const {send} = require('micro');
 const Router = require('./lib/Router');
 const {verify, store, logger} = require('./middlewares');
+const {storeDirectory} = require('../config');
 
 const router = new Router((req, res) => {
     send(res, 404);
@@ -9,7 +10,7 @@ const router = new Router((req, res) => {
 // router.use(auth);
 router.use(logger('combined'));
 router.use(verify);
-router.use(store('./store'));
+router.use(store(storeDirectory));
 router.register('./src/routes');
 
 /**

@@ -3,8 +3,7 @@
 const micro = require('micro');
 const router = require('./src/router');
 const {version} = require('./package');
-
-const port = process.env.PORT || 3000;
+const {port} = require('./config');
 
 /**
  * User: Oleg Kamlowski <oleg.kamlowski@thomann.de>
