@@ -23,8 +23,12 @@ module.exports = async ({req, res, query, store}) => {
         }
 
         const buffered = await buffer(req, OPTIONS);
-        file.write(buffered);
 
+        if (!(!!buffered && JSON.parse(buffered))) {
+            return send(res, HTTPStatus.FORBIDDEN);
+        }
+
+        file.write(buffered);
         send(res, HTTPStatus.CREATED);
     } catch (e) {
         store.delete(version, name);
