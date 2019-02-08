@@ -17,11 +17,18 @@ class File {
 
     /**
      *
+     * @return {boolean}
      */
     unlink() {
         const {_path: path} = this;
 
-        unlink(path);
+        try {
+            unlink(path)
+        } catch (e) {
+            return false;
+        }
+
+        return true;
     }
 
     /**
@@ -36,12 +43,19 @@ class File {
 
     /**
      *
-      * @param buffer
+     * @param buffer
+     * @return {boolean}
      */
     write(buffer) {
         const {_path: path} = this;
 
-        write(path, buffer, 'utf8');
+        try {
+            write(path, buffer, 'utf8');
+        } catch (e) {
+            return false;
+        }
+
+        return true;
     }
 }
 

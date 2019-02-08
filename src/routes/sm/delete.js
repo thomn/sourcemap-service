@@ -10,6 +10,10 @@ module.exports = async ({req, res, query, store}) => {
     const {v: version, n: name} = query;
     const file = store.get(version, name);
 
+    if (!file) {
+        return send(res, HTTPStatus.BAD_REQUEST);
+    }
+
     try {
         const unlinked = file.unlink();
 
