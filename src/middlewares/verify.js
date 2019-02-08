@@ -10,26 +10,32 @@ const HTTPStatus = require('../lib/HTTPStatus');
 const verify = (next) => ({req, res, query, ...rest}) => {
     const {n: name, v: version} = query;
 
-    if (!name || !version) {
+    const bail = [
+        // cant be null
+        () => (!name),
+        () => (!version),
+
+        // cant be array
+        () => (Array.isArray(name)),
+        () => (Array.isArray(version)),
+
+        // only numbers
+        () => (version !== (parseInt(version) + '')),
+
+        // only filenames
+        () => (name !== basename(name)),
+
+        // only alphanumerical values with extensions
+        () => (name !== name.replace(/[^a-z0-9.\-_]/g, '')),
+    ].some(
+        (test) => test(),
+    );
+
+    if (bail) {
         return send(res, HTTPStatus.BAD_REQUEST);
     }
 
-    const passed = [
-        // only numbers
-        (version === (parseInt(version) + '')),
-
-        // only filenames
-        (name === basename(name)),
-
-        // only alphanumerical values with extensions
-        (name === name.replace(/[^a-z0-9.\-_]/g, '')),
-    ].every(Boolean);
-
-    if (passed) {
-        return next({req, res, query, ...rest});
-    }
-
-    send(res, HTTPStatus.BAD_REQUEST);
+    return next({req, res, query, ...rest});
 };
 
 /**
