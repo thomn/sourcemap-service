@@ -4,7 +4,7 @@ const Store = require('../lib/Store');
 /**
  *
  * @param path
- * @return {function(*): function({req: *, res: *, [p: string]: *}): *}
+ * @return {function(*): function(*=, *=, *=, *=): *}
  */
 const factory = (path) => {
     const root = resolve(path);
@@ -12,9 +12,13 @@ const factory = (path) => {
         .initialise()
     ;
 
-    return (next) => ({req, res, ...rest}) => (
-        next({req, res, store, ...rest})
-    );
+    return (next) => (req, res, query, container) => {
+        container.store = store;
+
+        return (
+            next(req, res, query, container)
+        );
+    };
 };
 
 /**

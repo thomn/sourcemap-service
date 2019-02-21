@@ -8,8 +8,8 @@ const morgan = require('morgan');
 const factory = (format) => {
     const logger = morgan(format);
 
-    return (next) => ({req, res, ...rest}) => {
-        logger(req, res, () => next({req, res, ...rest}));
+    return (next) => (req, res, ...rest) => {
+        logger(req, res, () => next(req, res, ...rest));
     };
 };
 

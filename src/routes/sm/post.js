@@ -7,7 +7,7 @@ const OPTIONS = {limit: '10mb', encoding: 'utf8'};
  * Date: 30.01.2019
  * Time: 17:39
  */
-module.exports = async ({req, res, query, store}) => {
+module.exports = async (req, res, query, {store}) => {
     const {v: version, n: name} = query;
     const exists = store.has(version, name);
 

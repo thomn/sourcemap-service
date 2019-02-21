@@ -7,7 +7,7 @@ const HTTPStatus = require('../lib/HTTPStatus');
  * @param next
  * @return {Function}
  */
-const verify = (next) => ({req, res, query, ...rest}) => {
+const verify = (next) => (req, res, query, ...rest) => {
     const {n: name, v: version} = query;
 
     const bail = [
@@ -35,7 +35,7 @@ const verify = (next) => ({req, res, query, ...rest}) => {
         return send(res, HTTPStatus.BAD_REQUEST);
     }
 
-    return next({req, res, query, ...rest});
+    return next(req, res, query, ...rest);
 };
 
 /**

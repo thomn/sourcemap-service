@@ -1,24 +1,24 @@
 const {send} = require('micro');
-const Router = require('./lib/Router');
+const router = require('micro-r');
 const {verify, store, logger} = require('./middlewares');
 const {storeDirectory} = require('../config');
 
-const router = new Router((req, res) => {
+const {register, route, use} = router((req, res) => {
     send(res, 404);
 });
 
 if (process.env.NODE_ENV === 'production') {
     // router.use(auth);
-    router.use(logger('combined'));
+    use(logger('combined'));
 }
 
-router.use(verify);
-router.use(store(storeDirectory));
-router.register('./src/routes');
+use(verify);
+use(store(storeDirectory));
+register('./src/routes');
 
 /**
  * User: Oleg Kamlowski <oleg.kamlowski@thomann.de>
  * Date: 11.12.2018
  * Time: 19:26
  */
-module.exports = (req, res) => router.route(req, res);
+module.exports = route;

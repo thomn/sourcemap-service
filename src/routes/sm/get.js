@@ -6,7 +6,7 @@ const HTTPStatus = require('../../lib/HTTPStatus');
  * Date: 30.01.2019
  * Time: 17:39
  */
-module.exports = async ({req, res, query, store}) => {
+module.exports = async (req, res, query, {store}) => {
     const {v: version, n: name} = query;
     const file = store.get(version, name);
 
