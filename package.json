@@ -1,6 +1,6 @@
 {
-  "name": "@thomn/sourcemap-service",
-  "version": "1.4.0",
+  "name": "@thomann/sourcemap-service",
+  "version": "1.4.1",
   "description": "private sourcemaps provider",
   "main": "index.js",
   "scripts": {
@@ -29,9 +29,6 @@
   "repository": {
     "type": "git",
     "url": "https://github.com/thomn/sourcemap-service.git"
-  },
-  "bin": {
-    "sms": "./index.js"
   },
   "keywords": [
     "sourcemaps",
