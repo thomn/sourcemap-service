@@ -37,3 +37,10 @@ http://localhost:80/sm?v=8&n=foo.js.map
 ```
 http://localhost:80/sm?v=8&n=foo.js.map
 ```
+
+
+Healthcheck  
+```
+curl "http://localhost:80/healthz?n=health&v=1"
+ok
+```
