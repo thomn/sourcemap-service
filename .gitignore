@@ -3,3 +3,4 @@
 /store/*
 
 !/**/.gitkeep
+package-lock.json
