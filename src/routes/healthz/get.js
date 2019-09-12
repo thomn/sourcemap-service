@@ -1,4 +1,4 @@
-const {send = require('micro');
+const send = require('micro');
 const HTTPStatus = require('../../lib/HTTPStatus');
 
 module.exports = async (req, res, query, {store}) => {
@@ -9,7 +9,7 @@ module.exports = async (req, res, query, {store}) => {
         if (exists) {
             store.delete(version, name);
         }
-        
+
         const file = store.create(version, name);
 
         if (!file.write()) {
