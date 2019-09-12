@@ -1,25 +1,30 @@
+process.env.STORE_DIRECTORY = 'test/store';
+
 const micro = require('micro');
 const router = require('../src/router');
 const request = require('supertest');
 const app = micro(router);
 
 describe('GET /', () => {
+    before(router.ready);
+
     describe('should fail', () => {
-        it('returns 404', (done) => {
+        it('returns 400', (done) => {
             request(app)
                 .get('/')
-                .expect(404, done)
+                .expect(400, done)
             ;
         });
     });
 });
 
 describe('GET /sm', () => {
+    before(router.ready);
+
     describe('legit request', () => {
         it('returns json map', (done) => {
             request(app)
                 .get('/sm?n=test.js.map&v=1')
-                .expect('Content-Type', /octet-stream/)
                 .expect(200, done)
             ;
         });

@@ -14,7 +14,17 @@ if (process.env.NODE_ENV === 'production') {
 
 use(verify);
 use(store(storeDirectory));
-register('./src/routes');
+
+// make it testable
+let ready = (overwrite) => {
+    if (ready.overwriten) {
+        return ready();
+    } else if (overwrite) {
+        ready = overwrite;
+        ready.overwriten = true;
+    }
+};
+register('./src/routes', ready);
 
 /**
  * User: Oleg Kamlowski <oleg.kamlowski@thomann.de>
@@ -22,3 +32,4 @@ register('./src/routes');
  * Time: 19:26
  */
 module.exports = route;
+module.exports.ready = ready;
