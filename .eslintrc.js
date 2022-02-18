@@ -1,0 +1,37 @@
+module.exports = {
+    root: true,
+    parser: '@typescript-eslint/parser',
+    plugins: ['@typescript-eslint'],
+    extends: [
+        'eslint:recommended',
+        'plugin:@typescript-eslint/recommended',
+    ],
+    rules: {
+        'indent': ['warn', 4],
+        'quotes': ['warn', 'single'],
+        'space-before-function-paren': ['warn', 'always'],
+        'curly': ['warn', 'all'],
+        'array-bracket-newline': ['warn', {'multiline': true}],
+        'eol-last': ['warn'],
+        'arrow-spacing': 'warn',
+        'comma-dangle': ['warn', 'always-multiline'],
+        'function-call-argument-newline': ['warn', 'consistent'],
+        'function-paren-newline': ['warn', 'multiline'],
+        'multiline-ternary': ['warn', 'always'],
+        'no-multi-spaces': ['warn'],
+        'no-multiple-empty-lines': ['warn', {'max': 1}],
+        'no-trailing-spaces': ['warn'],
+        'no-whitespace-before-property': ['warn'],
+        'object-curly-newline': ['warn', {'consistent': true}],
+        'operator-linebreak': ['warn', 'before'],
+        'padded-blocks': ['warn', 'never'],
+        'padding-line-between-statements': [
+            'warn', {
+                blankLine: 'always',
+                prev: '*',
+                next: 'return',
+            },
+        ],
+    },
+    ignorePatterns: ['test/*'],
+};
