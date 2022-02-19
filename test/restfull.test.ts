@@ -115,7 +115,7 @@ describe('SourceMapService', () => {
                     .post('/artifact/claim')
                     .send({crc: '456def'})
                     .expect(({text}) => {
-                        assert(text === '');
+                        assert(text === 'cached');
                     })
                     .expect(400, done)
                 ;
