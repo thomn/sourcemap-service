@@ -18,6 +18,7 @@ export default container(async ({artifacts, context}) => {
     if (candidate) {
         return {
             status: 'BAD_REQUEST',
+            data: candidate._id,
         };
     }
 
