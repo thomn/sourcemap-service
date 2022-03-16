@@ -32,7 +32,11 @@ const factory = async (): Promise<Middleware> => {
 
                 if (req.headers && req.headers['content-type']) {
                     if (req.headers['content-type'] === 'application/json') {
-                        body = JSON.parse(body);
+                        try {
+                            body = JSON.parse(body);
+                        } catch (e) {
+                            body = null;
+                        }
                     }
                 }
 
