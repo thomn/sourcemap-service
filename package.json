@@ -1,7 +1,7 @@
 {
   "name": "@thomann/sourcemap-service",
   "version": "2.0.0",
-  "description": "private sourcemaps provider",
+  "description": "service for up-/downloading artifacts\n",
   "main": "index.js",
   "scripts": {
     "start": "set \"NODE_ENV=production\" & node index.js",
