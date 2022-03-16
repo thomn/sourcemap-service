@@ -1,16 +1,15 @@
 #!/usr/bin/env node
+const cwd = process.cwd();
+process.chdir(__dirname);
 
-const micro = require('micro');
-const router = require('./src/router');
-const {version} = require('./package');
-const {port} = require('./config');
-
-/**
- * User: Oleg Kamlowski <oleg.kamlowski@thomann.de>
- * Date: 11.12.2018
- * Time: 19:26
- */
-const server = micro(router);
-server.listen(port, () => {
-    console.info(`> sourcemap-service:${version} listening on port ${port}`);
+require('ts-node').register({
+    transpileOnly: true,
+    require: [
+        require.resolve('tsconfig-paths/register'),
+    ],
 });
+
+process.chdir(cwd);
+
+const {default: service} = require('./src/index');
+service().catch(console.error);

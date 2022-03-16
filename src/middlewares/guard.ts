@@ -1,0 +1,36 @@
+import {get} from 'container';
+import type {Middleware, Context} from 'types';
+
+const HEX_REGEX = /^[0-9a-f]+$/gi;
+
+/**
+ *
+ */
+const factory = async (): Promise<Middleware> => {
+    /**
+     *
+     */
+    const isValid = (hex: string): boolean => {
+        return (new RegExp(HEX_REGEX)).test(hex);
+    };
+
+    /**
+     *
+     */
+    return (req, res, next) => {
+        const context = get<Context>('context');
+        const {crc} = context.get<{ crc: string }>('body');
+        if (!crc || isValid(crc)) {
+            return next();
+        }
+
+        throw new Error('error');
+    };
+};
+
+/**
+ * User: Oleg Kamlowski <oleg.kamlowski@thomann.de>
+ * Date: 29.01.2022
+ * Time: 17:00
+ */
+export default factory;

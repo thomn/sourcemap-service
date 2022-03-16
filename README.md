@@ -1,10 +1,11 @@
 <h1 align="left">Sourcemap Service</h1>
 
-microservice for providing versioned sourcemaps
+service for up-/downloading artifacts
 
 ***
 
 ## Installation
+
 Clone this repository and run the start script
 
 ```bash
@@ -14,33 +15,31 @@ $ npm run start
 ```
 
 ## Endpoints
-* GET: `/sm`:  -> retrival
-* POST: `/sm`: -> upload
-* DELETE: `/sm`: -> removal
 
-## QueryParameters
-* `v` (mandatory): version, only integer values 
-* `n` (mandatory): name, only alphanummeric values except `.-_` 
+* GET: `/artifact/[id]`:  -> get artifact by id
+* POST: `/artifact/[id]`: -> upload artifact by id
+* DELETE: `/artifact/[id]`: -> delete artifact by id
+* POST: `/artifact/claim`: -> get artifact id
 
 ## Examples
-`post` a map by a POST requesrt
+
+### Uploading
+
 ```bash
-curl -v -X POST -H "Content-Type: application/json" -d @styles.css.map "http://localhost:80/sm?v=2&n=styles.map"
+$ curl -X POST http://localhost:4000/artifact/claim -H "Content-Type: application/json" -d "{\"crc\":\"123321\"}"
+// rtf:40iki2Ahud1Ig
+$ curl -X POST http://localhost:4000/artifact/rtf:40iki2Ahud1Ig -d @script.js.map
 ```
 
-`get` a map by a GET requesrt
-```
-http://localhost:80/sm?v=8&n=foo.js.map
+### Retrieving
+
+```bash
+$curl http://localhost:4000/artifact/rtf:40iki2Ahud1Ig --output script.js.map
 ```
 
-`delete` a map by a DELETE request  
-```
-http://localhost:80/sm?v=8&n=foo.js.map
-```
+### Health check
 
-
-Healthcheck  
 ```
-curl "http://localhost:80/healthz?n=health&v=1"
-ok
+curl "http://localhost:80/healthz"
+// ok
 ```
