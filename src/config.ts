@@ -1,28 +1,20 @@
 import sevl from 'sevl';
-import {Config} from 'types';
+import {Env} from 'types';
 
 /**
  *
  */
 const factory = () => {
-    let config: Config;
+    let env: Env;
 
-    return async (): Promise<Config> => {
-        if (config) {
-            return config;
+    return async (): Promise<Env> => {
+        if (env) {
+            return env;
         }
 
-        const {
-            PORT = 3000,
-            STORE_DIRECTORY = './store',
-            DEBUG = 'false',
-        } = await sevl();
+        env = await sevl() as Env;
 
-        return config = {
-            PORT,
-            STORE_DIRECTORY,
-            DEBUG,
-        };
+        return env;
     };
 };
 
