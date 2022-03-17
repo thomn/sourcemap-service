@@ -34,12 +34,12 @@ $ curl -X POST http://localhost:4000/artifact/rtf:40iki2Ahud1Ig -d @script.js.ma
 ### Retrieving
 
 ```bash
-$curl http://localhost:4000/artifact/rtf:40iki2Ahud1Ig --output script.js.map
+$ curl http://localhost:4000/artifact/rtf:40iki2Ahud1Ig --output script.js.map
 ```
 
 ### Health check
 
 ```
-curl "http://localhost:80/healthz"
+$ curl "http://localhost:80/healthz"
 // ok
 ```
