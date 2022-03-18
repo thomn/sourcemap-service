@@ -1,6 +1,6 @@
 {
   "name": "@thomann/sourcemap-service",
-  "version": "2.0.1",
+  "version": "2.0.2",
   "description": "service for up-/downloading artifacts\n",
   "main": "index.js",
   "scripts": {
@@ -20,7 +20,7 @@
   "license": "ISC",
   "dependencies": {
     "fsbr": "^1.0.10",
-    "sevl": "^0.1.4",
+    "sevl": "^0.1.5",
     "teda": "^0.1.4",
     "ts-node": "^10.4.0",
     "tsconfig-paths": "^3.12.0",
