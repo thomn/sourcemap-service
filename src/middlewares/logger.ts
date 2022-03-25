@@ -18,7 +18,7 @@ const factory = async (): Promise<Middleware> => {
         return false;
     };
 
-    return teda(Format.TINY, {
+    return teda(Format.DEFAULT, {
         skip,
     });
 };
