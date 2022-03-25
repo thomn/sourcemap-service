@@ -1,6 +1,7 @@
 import {set} from 'container';
 import {parse} from 'url';
 import {context} from 'modules';
+import {capture} from 'debug';
 import type {Middleware} from 'types';
 
 /**
@@ -34,7 +35,8 @@ const factory = async (): Promise<Middleware> => {
                     if (req.headers['content-type'] === 'application/json') {
                         try {
                             payload = JSON.parse(payload);
-                        } catch (e) {
+                        } catch (err) {
+                            capture(err);
                             payload = null;
                         }
                     }

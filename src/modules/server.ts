@@ -1,5 +1,6 @@
 import {createServer, IncomingMessage, Server, ServerResponse} from 'http';
 import {ReadStream, statSync} from 'fs';
+import {capture} from 'debug';
 import {Status} from 'status';
 import {Return} from '../types';
 
@@ -118,6 +119,7 @@ const factory = (name: string, version: string) => {
          * @param err
          */
         const onReject = (err) => {
+            capture(err);
             console.error(err);
 
             send(res, Status.INTERNAL_SERVER_ERROR);

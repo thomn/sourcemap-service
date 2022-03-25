@@ -1,5 +1,6 @@
 import {existsSync as exists} from 'fs';
 import {createReadStream, ReadStream, unlinkSync, writeFileSync} from 'fs';
+import {capture} from 'debug';
 import type {File} from 'types';
 
 /**
@@ -23,7 +24,9 @@ const factory = (cursor: string): File => {
             isValid(cursor)
                 && unlinkSync(cursor)
             ;
-        } catch (e) {
+        } catch (err) {
+            capture(err);
+
             return false;
         }
 
@@ -34,9 +37,15 @@ const factory = (cursor: string): File => {
      *
      */
     const read = (): false | ReadStream => {
-        return isValid(cursor)
-            && createReadStream(cursor)
-        ;
+        try {
+            return isValid(cursor)
+                && createReadStream(cursor)
+            ;
+        } catch (err) {
+            capture(err);
+        }
+
+        return false;
     };
 
     /**
@@ -46,7 +55,9 @@ const factory = (cursor: string): File => {
     const write = (buffer: string): boolean => {
         try {
             writeFileSync(cursor, buffer, 'utf8');
-        } catch (e) {
+        } catch (err) {
+            capture(err);
+
             return false;
         }
 
