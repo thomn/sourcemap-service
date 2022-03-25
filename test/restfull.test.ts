@@ -8,7 +8,7 @@ describe('SourceMapService', () => {
 
     before(async () => {
         process.chdir(__dirname);
-        cleanup();
+        await cleanup();
         create();
         instance = await sms();
     });
@@ -52,10 +52,16 @@ describe('SourceMapService', () => {
         });
 
         describe('incomplete get request', () => {
-            it('should return 404', (done) => {
+            it('should return 200', (done) => {
                 request(instance.server)
                     .get('/artifact')
-                    .expect(404, done)
+                    .expect(({body}) => {
+                        assert(Array.isArray(body));
+                        assert(body.length === 2);
+                        assert(body[0].size === 1337);
+                        assert(body[1].size === 0);
+                    })
+                    .expect(200, done)
                 ;
             });
         });
@@ -74,7 +80,8 @@ describe('SourceMapService', () => {
             it('should upload sourcemap and return artifact id', (done) => {
                 request(instance.server)
                     .post('/artifact/rtf:54Rg1sFj9QbqI')
-                    .send(JSON.stringify({foo: "bar"}))
+                    .set('Content-Type', 'application/json')
+                    .send(JSON.stringify({data: "{foo: 'bar'}"}))
                     .expect(({text}) => {
                         assert(text === 'rtf:54Rg1sFj9QbqI');
                     })
@@ -99,7 +106,7 @@ describe('SourceMapService', () => {
             it('should return claimed artifact id', (done) => {
                 request(instance.server)
                     .post('/artifact/claim')
-                    .send({crc: 'aaaaa'})
+                    .send({data: {crc: 'aaaaa'}})
                     .expect(({text}) => {
                         assert(typeof text === "string");
                     })
@@ -113,7 +120,7 @@ describe('SourceMapService', () => {
             it('should return 404', (done) => {
                 request(instance.server)
                     .post('/artifact/claim')
-                    .send({crc: '456def'})
+                    .send({data: {crc: '456def'}})
                     .expect(({text}) => {
                         assert(text === 'cached');
                     })
@@ -126,7 +133,7 @@ describe('SourceMapService', () => {
             it('should return 500', (done) => {
                 request(instance.server)
                     .post('/artifact/claim')
-                    .send({crc: 'foobar'})
+                    .send({data: {crc: 'foobar'}})
                     .expect(({text}) => {
                         assert(typeof text === 'string');
                     })

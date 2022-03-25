@@ -1,10 +1,12 @@
-import {writeFileSync, rmSync, mkdirSync} from 'fs';
+import {writeFileSync, rmdir, mkdirSync} from 'fs';
 
 const TEMPLATE = {
     'name': 'artifacts',
     'schema': {
         '$$file': 'store',
         'crc': '',
+        'size': 0,
+        'context': '{}'
     },
     'entries': [
         {
@@ -12,12 +14,20 @@ const TEMPLATE = {
             '_ts': 0,
             '$$file': 'store\\foobar.map.json',
             'crc': '123abc',
+            'size': 1337,
+            'context': {
+                'version': 1,
+            },
         },
         {
             '_id': 'cached',
             '_ts': 0,
             '$$file': 'store\\foobar.map.json',
             'crc': '456def',
+            'size': 0,
+            'context': {
+                'version': 2,
+            },
         },
     ],
     'timestamp': 1644014393621,
@@ -40,11 +50,7 @@ export const create = () => {
  *
  */
 export const cleanup = () => {
-    try {
-        rmSync('./store', {
-            recursive: true,
-        });
-    } catch (e) {
-        //
-    }
+    return new Promise((resolve) => {
+        rmdir('./store', {recursive: true}, resolve);
+    });
 };
