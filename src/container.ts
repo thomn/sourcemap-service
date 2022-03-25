@@ -1,4 +1,4 @@
-import {container} from 'services';
+import {container} from 'modules';
 import {Context, Resolvable} from 'types';
 
 const {get, set, resolve} = container();

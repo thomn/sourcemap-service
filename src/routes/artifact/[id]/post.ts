@@ -14,10 +14,16 @@ export default container(async ({context, artifacts}) => {
         };
     }
 
-    const body = context.get<string>('body');
+    const {data, context: meta} = context.get<{ data: string, context: object }>('payload');
 
     const {$$file} = artifact;
-    $$file.write(body);
+    $$file.write(data);
+    artifacts.update(id, {
+        context: meta,
+        size: Buffer.byteLength(data, 'utf8'),
+    });
+
+    await artifacts.write();
 
     return {
         status: 'CREATED',

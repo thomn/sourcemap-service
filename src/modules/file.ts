@@ -1,22 +1,12 @@
 import {existsSync as exists} from 'fs';
-import {extname} from 'path';
 import {createReadStream, ReadStream, unlinkSync, writeFileSync} from 'fs';
 import type {File} from 'types';
 
 /**
  *
  * @param cursor
- * @param extension
  */
-const factory = (cursor: string, extension = 'json'): File => {
-    /**
-     *
-     * @param cursor
-     */
-    const isCollection = (cursor: string): boolean => {
-        return extname(cursor) === `.${extension}`;
-    };
-
+const factory = (cursor: string): File => {
     /**
      *
      * @param cursor
@@ -30,8 +20,7 @@ const factory = (cursor: string, extension = 'json'): File => {
      */
     const unlink = (): boolean => {
         try {
-            isCollection(cursor)
-                && isValid(cursor)
+            isValid(cursor)
                 && unlinkSync(cursor)
             ;
         } catch (e) {
@@ -45,8 +34,7 @@ const factory = (cursor: string, extension = 'json'): File => {
      *
      */
     const read = (): false | ReadStream => {
-        return isCollection(cursor)
-            && isValid(cursor)
+        return isValid(cursor)
             && createReadStream(cursor)
         ;
     };
@@ -57,9 +45,7 @@ const factory = (cursor: string, extension = 'json'): File => {
      */
     const write = (buffer: string): boolean => {
         try {
-            isCollection(cursor)
-                && writeFileSync(cursor, buffer, 'utf8')
-            ;
+            writeFileSync(cursor, buffer, 'utf8');
         } catch (e) {
             return false;
         }

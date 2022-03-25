@@ -1,5 +1,5 @@
 import router from 'router';
-import {server} from 'services';
+import {server} from 'modules';
 import config from 'config';
 
 const {name, version} = require('../package.json');

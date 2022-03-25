@@ -1,6 +1,6 @@
 import {join} from 'path';
 import container from 'container';
-import {file} from 'services';
+import {file} from 'modules';
 import config from 'config';
 
 /**
@@ -9,7 +9,7 @@ import config from 'config';
  * Time: 19:46
  */
 export default container(async ({artifacts, context}) => {
-    const {crc} = context.get<{ crc: string }>('body');
+    const {data: {crc}} = context.get<{ data: { crc: string }, context?: object }>('payload');
     const [candidate] = artifacts.query()
         .eq('crc', crc)
         .get()
@@ -23,7 +23,7 @@ export default container(async ({artifacts, context}) => {
     }
 
     const {STORE_DIRECTORY} = await config();
-    const point = join(STORE_DIRECTORY, crc + '.map.json');
+    const point = join(STORE_DIRECTORY, crc);
 
     const id = artifacts.add({
         crc,

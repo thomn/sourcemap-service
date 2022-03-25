@@ -4,7 +4,7 @@ export type Context = {
 }
 
 export const Resources = [
-    'body',
+    'payload',
     'query',
     'param',
 ] as const;

@@ -19,8 +19,9 @@ const factory = async (): Promise<Middleware> => {
      */
     return (req, res, next) => {
         const context = get<Context>('context');
-        const {crc} = context.get<{ crc: string }>('body');
-        if (!crc || isValid(crc)) {
+        const payload = context.get<{ data: { crc: string } }>('payload');
+        const crc = payload?.data?.crc;
+        if (isValid(crc)) {
             return next();
         }
 

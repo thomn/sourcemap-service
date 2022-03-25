@@ -1,6 +1,6 @@
 import {set} from 'container';
 import {parse} from 'url';
-import {context} from 'services';
+import {context} from 'modules';
 import type {Middleware} from 'types';
 
 /**
@@ -26,21 +26,21 @@ const factory = async (): Promise<Middleware> => {
              *
              */
             const onEnd = () => {
-                let body = chunks.filter(Boolean)
+                let payload = chunks.filter(Boolean)
                     .join('')
                 ;
 
                 if (req.headers && req.headers['content-type']) {
                     if (req.headers['content-type'] === 'application/json') {
                         try {
-                            body = JSON.parse(body);
+                            payload = JSON.parse(payload);
                         } catch (e) {
-                            body = null;
+                            payload = null;
                         }
                     }
                 }
 
-                instance.update('body', body);
+                instance.update('payload', payload);
                 set('context', instance);
 
                 resolve(next());
