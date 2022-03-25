@@ -7,7 +7,7 @@ import {Resource} from '../types';
 const factory = (): Context => {
     const context: State = {
         query: undefined,
-        body: undefined,
+        payload: undefined,
         param: undefined,
     };
 
