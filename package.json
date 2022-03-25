@@ -21,11 +21,11 @@
   "dependencies": {
     "fsbr": "^1.0.10",
     "sevl": "^0.1.5",
-    "teda": "^0.1.4",
+    "teda": "^0.1.5",
     "ts-node": "^10.4.0",
     "tsconfig-paths": "^3.12.0",
     "typescript": "^4.5.4",
-    "vano": "^0.1.3"
+    "vano": "^0.1.4"
   },
   "devDependencies": {
     "@types/mocha": "^9.0.0",
