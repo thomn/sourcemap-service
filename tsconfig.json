@@ -9,17 +9,20 @@
     "sourceMap": true,
     "outDir": "./dist",
     "baseUrl": "./src",
+    "paths": {
+      "*": [
+        "node_modules/*"
+      ],
+      "#/*": [
+        "./*"
+      ]
+    },
     "declaration": true,
     "declarationDir": "./types"
   },
   "exclude": [
     "test/**"
   ],
-  "paths": {
-    "*": [
-      "*"
-    ]
-  },
   "lib": [
     "ES6"
   ],
