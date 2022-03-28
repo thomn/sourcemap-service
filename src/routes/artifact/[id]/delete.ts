@@ -17,8 +17,10 @@ export default container(async ({context, artifacts}) => {
     const {$$file} = artifact;
     $$file.unlink();
 
+    artifacts.remove(id);
+    await artifacts.write();
+
     return {
         status: 'OK',
-        data: artifacts.remove(id),
     };
 });
