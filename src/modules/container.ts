@@ -1,4 +1,4 @@
-import type {Callables, Container} from 'types';
+import type {Callables, Container} from '#/types';
 
 const FN_SIGNATURE_REGEX = /^\(({?(.*?)}?)\)|(\w+)/;
 const FN_BRACES = /^{(.*?)}$/;

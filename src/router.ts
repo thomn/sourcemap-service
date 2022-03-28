@@ -1,7 +1,7 @@
 import {resolve} from 'path';
 import fsbr from 'fsbr';
-import {container, context, sinkhole, logger, store} from 'middlewares';
-import config from 'config';
+import {container, context, sinkhole, logger, store} from '#/middlewares';
+import config from '#/config';
 
 /**
  *

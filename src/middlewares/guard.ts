@@ -1,5 +1,5 @@
-import {get} from 'container';
-import type {Middleware, Context} from 'types';
+import {get} from '#/container';
+import type {Middleware, Context} from '#/types';
 
 const HEX_REGEX = /^[0-9a-f]+$/gi;
 

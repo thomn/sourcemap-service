@@ -1,4 +1,4 @@
-import container from 'container';
+import container from '#/container';
 
 /**
  * User: Oleg Kamlowski <oleg.kamlowski@thomann.de>

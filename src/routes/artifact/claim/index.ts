@@ -1,4 +1,4 @@
-import {guard} from 'middlewares';
+import {guard} from '#/middlewares';
 
 /**
  * User: Oleg Kamlowski <oleg.kamlowski@thomann.de>

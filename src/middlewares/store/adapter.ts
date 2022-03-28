@@ -1,5 +1,5 @@
 import {Adapter, file as adapter} from 'vano';
-import {file} from 'modules';
+import {file} from '#/modules';
 import {FILE_KEY} from './index';
 
 /**

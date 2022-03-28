@@ -1,10 +1,10 @@
 import {normalize} from 'path';
 import vano from 'vano';
-import {file} from 'modules';
-import {set} from 'container';
+import {file} from '#/modules';
+import {set} from '#/container';
 import adapter from './adapter';
-import type {Middleware} from 'types';
-import type {Artifact} from 'types/collections';
+import type {Middleware} from '#/types';
+import type {Artifact} from '#/types/collections';
 
 export const FILE_KEY = '$$file';
 

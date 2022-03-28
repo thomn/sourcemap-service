@@ -1,5 +1,4 @@
-import type {Context, State} from '../types';
-import {Resource} from '../types';
+import type {Context, State, Resource} from '#/types';
 
 /**
  *

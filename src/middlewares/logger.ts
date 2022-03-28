@@ -1,5 +1,5 @@
 import teda, {Format} from 'teda';
-import {Middleware} from 'types';
+import type {Middleware} from '#/types';
 
 /**
  *

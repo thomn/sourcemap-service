@@ -1,8 +1,8 @@
-import {set} from 'container';
 import {parse} from 'url';
-import {context} from 'modules';
-import {capture} from 'debug';
-import type {Middleware} from 'types';
+import {set} from '#/container';
+import {context} from '#/modules';
+import {capture} from '#/debug';
+import type {Middleware} from '#/types';
 
 /**
  *

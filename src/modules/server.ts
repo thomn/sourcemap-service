@@ -1,8 +1,8 @@
 import {createServer, IncomingMessage, Server, ServerResponse} from 'http';
 import {ReadStream, statSync} from 'fs';
-import {capture} from 'debug';
-import {Status} from 'status';
-import {Return} from '../types';
+import {capture} from '#/debug';
+import {Status} from '#/status';
+import type {Return} from '#/types';
 
 const ContentType = {
     TEXT: 'text/plain',

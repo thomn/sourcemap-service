@@ -1,7 +1,6 @@
-import {existsSync as exists} from 'fs';
-import {createReadStream, ReadStream, unlinkSync, writeFileSync} from 'fs';
-import {capture} from 'debug';
-import type {File} from 'types';
+import {existsSync as exists, createReadStream, ReadStream, unlinkSync, writeFileSync} from 'fs';
+import {capture} from '#/debug';
+import type {File} from '#/types';
 
 /**
  *

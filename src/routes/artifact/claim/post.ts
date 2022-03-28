@@ -1,7 +1,7 @@
 import {join} from 'path';
-import container from 'container';
-import {file} from 'modules';
-import config from 'config';
+import container from '#/container';
+import {file} from '#/modules';
+import config from '#/config';
 
 /**
  * User: Oleg Kamlowski <oleg.kamlowski@thomann.de>

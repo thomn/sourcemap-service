@@ -1,5 +1,5 @@
-import {container} from 'modules';
-import {Context, Resolvable} from 'types';
+import {container} from '#/modules';
+import type {Context, Resolvable} from '#/types';
 
 const {get, set, resolve} = container();
 

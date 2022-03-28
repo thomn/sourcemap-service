@@ -1,5 +1,5 @@
 import sevl from 'sevl';
-import {Env} from 'types';
+import type {Env} from '#/types';
 
 /**
  *

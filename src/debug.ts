@@ -1,5 +1,5 @@
 import * as Sentry from '@sentry/node';
-import config from 'config';
+import config from '#/config';
 
 config().then(({SENTRY_DSN}) => {
     const config = {

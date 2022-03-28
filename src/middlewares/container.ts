@@ -1,5 +1,5 @@
-import {set} from 'container';
-import {Middleware} from 'types';
+import {set} from '#/container';
+import type {Middleware} from '#/types';
 
 /**
  *
