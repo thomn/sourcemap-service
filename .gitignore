@@ -3,6 +3,9 @@
 /node_modules
 /store/*
 /coverage
+/dist
+/types
+/test/store
 
 !/**/.gitkeep
 package-lock.json
