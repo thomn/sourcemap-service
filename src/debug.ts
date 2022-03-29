@@ -9,7 +9,6 @@ config().then(({SENTRY_DSN}) => {
         dsn: null,
         enabled: false,
         maxBreadcrumbs: 0,
-        debug: true,
     };
 
     if (SENTRY_DSN) {
