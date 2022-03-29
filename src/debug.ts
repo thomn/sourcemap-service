@@ -63,7 +63,7 @@ const attachAsJson = async (attachments: object[], event, client: NodeClient) =>
  * @param e
  * @param context
  */
-const capture = async (e: any, context?: any): Promise<void> => {
+const capture = async (e: any, context?: {attachments: object[]}): Promise<void> => {
     const promise = new Promise(
         (resolve) => {
             Sentry.withScope((scope) => {
