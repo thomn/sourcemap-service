@@ -36,7 +36,12 @@ const factory = async (): Promise<Middleware> => {
                         try {
                             payload = JSON.parse(payload);
                         } catch (err) {
-                            capture(err);
+                            capture(err, {
+                                attachments: [{
+                                    payload,
+                                    type: typeof payload,
+                                }],
+                            });
                             payload = null;
                         }
                     }
