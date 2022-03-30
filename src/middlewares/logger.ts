@@ -11,11 +11,11 @@ const factory = async (): Promise<Middleware> => {
      */
     const skip = (req) => {
         const {url} = req;
-        if (url === '/favicon.ico') {
-            return true;
-        }
 
-        return false;
+        return [
+            '/',
+            '/favicon.ico',
+        ].includes(url);
     };
 
     return teda(Format.DEFAULT, {
