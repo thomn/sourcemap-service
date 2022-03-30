@@ -14,32 +14,31 @@ const factory = async (): Promise<Middleware> => {
         instance.update('query', query);
 
         return new Promise((resolve) => {
-            const chunks = [];
+            let body = '';
 
             /**
              *
+             * @param chunk
              */
-            const onReadable = () => {
-                chunks.push(req.read());
+            const onData = (chunk) => {
+                body += chunk;
             };
 
             /**
              *
              */
             const onEnd = () => {
-                let payload = chunks.filter(Boolean)
-                    .join('')
-                ;
+                let payload = null;
 
                 if (req.headers && req.headers['content-type']) {
                     if (req.headers['content-type'] === 'application/json') {
                         try {
-                            payload = JSON.parse(payload);
+                            payload = JSON.parse(body);
                         } catch (err) {
                             capture(err, {
                                 attachments: [{
-                                    payload,
-                                    type: typeof payload,
+                                    body,
+                                    type: typeof body,
                                 }],
                             });
                             payload = null;
@@ -53,7 +52,7 @@ const factory = async (): Promise<Middleware> => {
                 resolve(next());
             };
 
-            req.on('readable', onReadable);
+            req.on('data', onData);
             req.on('end', onEnd);
         });
     };
