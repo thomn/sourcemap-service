@@ -14,14 +14,14 @@ const factory = async (): Promise<Middleware> => {
         instance.update('query', query);
 
         return new Promise((resolve) => {
-            let body = '';
+            const chunks = [];
 
             /**
              *
              * @param chunk
              */
             const onData = (chunk) => {
-                body += chunk;
+                chunks.push(chunk);
             };
 
             /**
@@ -32,13 +32,17 @@ const factory = async (): Promise<Middleware> => {
 
                 if (req.headers && req.headers['content-type']) {
                     if (req.headers['content-type'] === 'application/json') {
+                        const data = Buffer.concat(chunks)
+                            .toString('utf-8')
+                        ;
+
                         try {
-                            payload = JSON.parse(body);
+                            payload = JSON.parse(data);
                         } catch (err) {
                             capture(err, {
                                 attachments: [{
-                                    body,
-                                    type: typeof body,
+                                    data,
+                                    type: typeof data,
                                 }],
                             });
                             payload = null;
