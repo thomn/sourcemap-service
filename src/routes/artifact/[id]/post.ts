@@ -17,7 +17,10 @@ export default container(async ({context, artifacts}) => {
     const {data, context: meta} = context.get<{ data: string, context: object }>('payload');
 
     const {$$file} = artifact;
-    $$file.write(data);
+    const buffer = Buffer.from(data, 'base64');
+    const string = buffer.toString();
+
+    $$file.write(string);
     artifacts.update(id, {
         context: meta,
         size: Buffer.byteLength(data, 'utf8'),
