@@ -1,7 +1,7 @@
-import {container} from '#/modules';
+import conr from 'conr';
 import type {Context, Resolvable} from '#/types';
 
-const {get, set, resolve} = container();
+const {get, set, resolve} = conr();
 
 /**
  *
