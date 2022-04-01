@@ -23,7 +23,7 @@ export default container(async ({context, artifacts}) => {
     $$file.write(string);
     artifacts.update(id, {
         context: meta,
-        size: Buffer.byteLength(data, 'utf8'),
+        size: Buffer.byteLength(string, 'utf8'),
     });
 
     await artifacts.write();

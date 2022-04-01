@@ -3,12 +3,14 @@ import * as Sentry from '@sentry/node';
 import type {NodeClient} from '@sentry/node'
 import FormData from 'form-data';
 import config from '#/config';
+import type {NodeOptions} from '@sentry/node/dist/types';
 
-config().then(({SENTRY_DSN}) => {
-    const config = {
+config().then(({SENTRY_DSN, NODE_ENV}) => {
+    const config: NodeOptions = {
         dsn: null,
         enabled: false,
         maxBreadcrumbs: 0,
+        environment: NODE_ENV,
     };
 
     if (SENTRY_DSN) {

@@ -4,4 +4,5 @@ export type Env = {
     DEBUG: string,
     SENTRY_DSN: string,
     API_TOKEN: string,
+    NODE_ENV: string,
 }

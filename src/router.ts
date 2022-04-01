@@ -1,6 +1,6 @@
 import {resolve} from 'path';
 import fsbr from 'fsbr';
-import {container, context, sinkhole, logger, store} from '#/middlewares';
+import {container, context, sinkhole, logger, store, debug} from '#/middlewares';
 import config from '#/config';
 
 /**
@@ -14,6 +14,7 @@ const factory = async () => {
         dev: JSON.parse(DEBUG || 'false'),
     });
 
+    use(await debug());
     use(await container());
     use(await context());
     use(await logger());
