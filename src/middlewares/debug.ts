@@ -1,4 +1,4 @@
-import {capture} from 'debug';
+import {capture} from '#/debug';
 import type {Middleware} from '#/types';
 
 /**
