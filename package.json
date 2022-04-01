@@ -4,7 +4,8 @@
   "description": "service for up-/downloading artifacts",
   "main": "index.js",
   "scripts": {
-    "start": "set \"NODE_ENV=production\" & node index.js",
+    "start": "node index.js",
+    "debug": "node index.js --inspect-brk=0.0.0.0",
     "build": "tsc --project tsconfig.prod.json",
     "inspect": "node --inspect node_modules/.bin/micro-dev",
     "watch": "tsc --watch",
