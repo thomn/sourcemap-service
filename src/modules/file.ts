@@ -20,9 +20,11 @@ const factory = (cursor: string): File => {
      */
     const unlink = (): boolean => {
         try {
-            isValid(cursor)
-                && unlinkSync(cursor)
-            ;
+            if (!isValid(cursor)) {
+                return false
+            }
+
+            unlinkSync(cursor);
         } catch (err) {
             capture(err);
 
