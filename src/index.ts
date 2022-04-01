@@ -1,6 +1,7 @@
 import router from '#/router';
 import {server} from '#/modules';
 import config from '#/config';
+import {capture} from '#/debug';
 
 const {name, version} = require('../package.json');
 
@@ -15,5 +16,6 @@ export default async () => {
     return server(name, version)
         .serve(await router())
         .listen(PORT)
+        .catch((e) => capture(e))
     ;
 };
