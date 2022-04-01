@@ -3,4 +3,5 @@ export type Env = {
     STORE_DIRECTORY: string,
     DEBUG: string,
     SENTRY_DSN: string,
+    API_TOKEN: string,
 }
