@@ -68,7 +68,7 @@ const capture = async (e: any, context?: {attachments: object[]}): Promise<void>
     const promise = new Promise(
         (resolve) => {
             Sentry.withScope((scope) => {
-                if (context.attachments && context.attachments.length) {
+                if (context && context.attachments && context.attachments.length) {
                     scope.addEventProcessor(async (event) => {
                         try {
                             await attachAsJson(
