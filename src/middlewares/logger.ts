@@ -14,6 +14,7 @@ const factory = async (): Promise<Middleware> => {
 
         return [
             '/',
+            '/healthz',
             '/favicon.ico',
         ].includes(url);
     };
