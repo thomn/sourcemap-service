@@ -1,4 +1,11 @@
 import container from '#/container';
+import {pick} from '#/utils';
+
+const WHITELIST = [
+    'user',
+    'version',
+    'name',
+];
 
 /**
  * User: Oleg Kamlowski <oleg.kamlowski@thomann.de>
@@ -14,16 +21,13 @@ export default container(async ({context, artifacts}) => {
         };
     }
 
-    const {data, context: meta} = context.get<{ data: string, context: object }>('payload');
-
+    const data = context.get<string>('payload');
     const {$$file} = artifact;
-    const buffer = Buffer.from(data, 'base64');
-    const string = buffer.toString();
 
-    $$file.write(string);
+    $$file.write(data);
     artifacts.update(id, {
-        context: meta,
-        size: Buffer.byteLength(string, 'utf8'),
+        size: data.length,
+        context: pick(WHITELIST, context.get<{}>('query')),
     });
 
     await artifacts.write();

@@ -9,7 +9,7 @@ import config from '#/config';
  * Time: 19:46
  */
 export default container(async ({artifacts, context}) => {
-    const {data: {crc}} = context.get<{ data: { crc: string }, context?: object }>('payload');
+    const crc = context.get<string>('payload');
     const [candidate] = artifacts.query()
         .eq('crc', crc)
         .get()

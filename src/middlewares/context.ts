@@ -1,7 +1,6 @@
 import {parse} from 'url';
 import {set} from '#/container';
 import {context} from '#/modules';
-import {capture} from '#/debug';
 import type {Middleware} from '#/types';
 
 /**
@@ -28,27 +27,9 @@ const factory = async (): Promise<Middleware> => {
              *
              */
             const onEnd = () => {
-                let payload = null;
-
-                if (req.headers && req.headers['content-type']) {
-                    if (req.headers['content-type'] === 'application/json') {
-                        const data = Buffer.concat(chunks)
-                            .toString('utf-8')
-                        ;
-
-                        try {
-                            payload = JSON.parse(data);
-                        } catch (err) {
-                            capture(err, {
-                                attachments: [{
-                                    data,
-                                    type: typeof data,
-                                }],
-                            });
-                            payload = null;
-                        }
-                    }
-                }
+                const payload = Buffer.concat(chunks)
+                    .toString('utf-8')
+                ;
 
                 instance.update('payload', payload);
                 set('context', instance);
