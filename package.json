@@ -1,13 +1,11 @@
 {
   "name": "@thomann/sourcemap-service",
-  "version": "2.1.6",
+  "version": "2.0.0",
   "description": "service for up-/downloading artifacts",
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
-    "debug": "node index.js --inspect-brk=0.0.0.0",
     "build": "tsc --project tsconfig.prod.json",
-    "inspect": "node --inspect node_modules/.bin/micro-dev",
     "watch": "tsc --watch",
     "coverage": "nyc npm test",
     "test": "mocha -r tsconfig-paths/register -r ts-node/register/transpile-only --full-trace 'test/**/*.ts'",
